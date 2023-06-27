@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { delay } from 'rxjs';
 import { MovieService } from 'src/app/services/movie.service';
 import { environment } from 'src/environments/environment';
 
@@ -58,7 +59,7 @@ export class MovieDetailsPage implements OnInit {
   }//end getRoute function
 
   getNextFive(){
-    if(this.similarMovies.length < 5){
+    if(this.similarMovies.length == 0){
       this.page ++;
       this.movieService.getSimilarMovies(this.movie.id, this.page).subscribe(res => {
         console.log(res);
@@ -66,11 +67,15 @@ export class MovieDetailsPage implements OnInit {
         this.similarMovies = res.results;
         console.log("getnextfive called with new page");
         console.table(this.similarMovies);
+      
+        return this.similarMovies.splice(0, 5);
       });//end subscribe to getSimilarMovies
     }//end if
-    console.log("getnextfive called");
-    console.table(this.similarMovies);
-    return this.similarMovies.splice(0, 5);
+
+      console.log("getnextfive called");
+      console.table(this.similarMovies);
+      return this.similarMovies.splice(0, 5);
+
   }//end getNextFive function
   
   getTmp(){
