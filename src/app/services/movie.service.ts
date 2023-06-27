@@ -26,10 +26,10 @@ export class MovieService {
     );
   }//end getCurrentPopularMovies function
 
-  getSimilarMovies(id: string): Observable<ApiResult> {
+  getSimilarMovies(id: string, page: number): Observable<ApiResult> {
     
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}/movie/${id}/similar?api_key=${environment.apiKey}`
+      `${environment.baseUrl}/movie/${id}/similar?api_key=${environment.apiKey}&page=${page}`
     );
   }//end getSimilarMovies function
 
