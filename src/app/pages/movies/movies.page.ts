@@ -44,6 +44,10 @@ export class MoviesPage implements OnInit {
     this.loadMovies(event);
   }//end loadMore function
 
+  loadSimilarMovies(){
+    
+  }
+
   
 
 }//end class

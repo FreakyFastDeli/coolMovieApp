@@ -32,6 +32,21 @@
       <ion-label>{{ movie.budget | currency: 'USD' }}</ion-label>
     </ion-item>
 
+    <ion-button (click)="toggleSimilarMovies()">
+      {{ showSimilarMovies ? 'Hide' : 'Show' }} Similar Movies
+    </ion-button>
+    <!-- TODO Implement similarMovies call -->
+    
+      <ion-list *ngIf="showSimilarMovies">
+        <ion-item button *ngFor="let item of similarMovies" >
+          <ion-avatar slot="start">
+            <img [src]="imageBaseUrl + '/w92' + item.poster_path" />
+          </ion-avatar>
+          <ion-label>{{ item.title }}</ion-label>
+        </ion-item>
+      </ion-list>
+    
+
     <ion-footer>
       <ion-button expand="full" (click)="openHomepage()">
         Open Movie Homepage
