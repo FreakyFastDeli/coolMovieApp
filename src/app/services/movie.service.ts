@@ -42,7 +42,7 @@ export class MovieService {
   getQueryResults(query: string): Observable<ApiResult> {
     console.log("getQueryResults function called");
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}/search/movie?query=${query}&api_key=${environment.apiKey}`
+      `${environment.baseUrl}/search/multi?query=${query}&api_key=${environment.apiKey}`
     );
   }//end getSearchQuery function
 

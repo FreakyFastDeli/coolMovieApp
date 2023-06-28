@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 
 export class MoviesPage implements OnInit {
   movies:any[] = [];
-  queryMovies:any[] = [];
+  queryResults:any[] = [];
   currentPopularPage:number = 1;
   showSearch:boolean = false;
   imageBaseUrl:string = environment.images;
@@ -52,11 +52,12 @@ export class MoviesPage implements OnInit {
 
   
   loadSearches(event?: any | undefined){
-    const query = event.target.value;
+    let query = event.target.value;
+    query = encodeURIComponent(query);
     this.movieService.getQueryResults(query).subscribe(res => {
-      console.log(res);
+      console.table(res.results);
       console.log("searched movie details^^");
-      this.queryMovies = res.results;
+      this.queryResults = res.results;
     })//end subscribe
   }//end loadSearches function
 
