@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Trending Movies</ion-title>
-    <ion-button class="search" slot="end" (click)="toggleShowSearch()"> <!--TODO Add Search functionality-->
+    <ion-title slot="start" *ngIf="!showSearch">Trending Movies</ion-title>
+    <ion-button class="searchbutton" slot="end" (click)="toggleShowSearch()">
       <ion-icon name="search-outline"></ion-icon>
     </ion-button>
     <ion-searchbar slot="end" [debounce]="750" (ionInput)="loadSearches($event)" *ngIf="showSearch"></ion-searchbar>
@@ -35,12 +35,13 @@
 <!-- When ShowSearch  -->
 <ion-content *ngIf="showSearch">
   <ion-list>
-    <ion-item button *ngFor="let item of queryMovies" [routerLink]="[item.id]">
+    <ion-item button *ngFor="let item of queryResults" [routerLink]="[item.id]">
       <ion-avatar slot="start">
         <img [src]="imageBaseUrl + '/w92' + item.poster_path" />
       </ion-avatar>
       <ion-label>{{item.title }}
         <p>{{ item.release_date }}</p>
+        <p>{{ item.overview }}</p>
       </ion-label>
 
       <ion-badge slot="end">{{ item.vote_average }}</ion-badge>
