@@ -12,7 +12,9 @@ import { environment } from 'src/environments/environment';
 
 export class MoviesPage implements OnInit {
   movies:any[] = [];
-  currentPage:number = 1;
+  queryMovies:any[] = [];
+  currentPopularPage:number = 1;
+  showSearch:boolean = false;
   imageBaseUrl:string = environment.images;
 
   constructor(private movieService: MovieService, private loadingCtrl: LoadingController) {}
@@ -22,31 +24,42 @@ export class MoviesPage implements OnInit {
 
   }//end ngOnInit function
 
-  async loadMovies(event?: { target: { complete: () => void; }; } | undefined){
+  async loadMovies(event?: any | undefined){
     const loading = await this.loadingCtrl.create({
       message: 'Loading...',
       spinner: 'circular',
     });
     await loading.present();
 
-    this.movieService.getCurrentPopularMovies(this.currentPage).subscribe(res => {
+    this.movieService.getCurrentPopularMovies(this.currentPopularPage).subscribe(res => {
       loading.dismiss();
       this.movies = [...this.movies, ...res.results];
       console.log(res);
-
+      console.log("current popular movies^^");
       event?.target.complete();
     })//end subscribe
   }//end loadMovies function
 
   loadMore(event: any | InfiniteScrollCustomEvent){
     //console.warn(event);
-    this.currentPage++;
+    this.currentPopularPage++;
     this.loadMovies(event);
   }//end loadMore function
 
-  loadSimilarMovies(){
-    
-  }
+  toggleShowSearch(){
+    this.showSearch = !this.showSearch;
+  }//end toggleShowSearch function
+
+  
+  loadSearches(event?: any | undefined){
+    const query = event.target.value;
+    this.movieService.getQueryResults(query).subscribe(res => {
+      console.log(res);
+      console.log("searched movie details^^");
+      this.queryMovies = res.results;
+    })//end subscribe
+  }//end loadSearches function
+
 
   
 

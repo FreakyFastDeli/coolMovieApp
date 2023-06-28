@@ -14,29 +14,36 @@ export interface ApiResult {
   providedIn: 'root'
 })
 export class MovieService {
-  searchMovies(searchTerm: any) {
-    throw new Error('Method not implemented.');
-  }//end searchMovies function
+  
 
   constructor(private http: HttpClient) { }
 
   getCurrentPopularMovies(page = 1): Observable<ApiResult> {
+    console.log("getCurrentPopularMovies function called");
     return this.http.get<ApiResult>(
       `${environment.baseUrl}/movie/popular?api_key=${environment.apiKey}&page=${page}`
     );
   }//end getCurrentPopularMovies function
 
   getSimilarMovies(id: string, page: number): Observable<ApiResult> {
-    
+    console.log("getSimilarMovies function called");
     return this.http.get<ApiResult>(
       `${environment.baseUrl}/movie/${id}/similar?api_key=${environment.apiKey}&page=${page}`
     );
   }//end getSimilarMovies function
 
   getMovieDetails(id: string) {
+    console.log("getMovieDetails function called");
     return this.http.get(
       `${environment.baseUrl}/movie/${id}?api_key=${environment.apiKey}`
     );
   }//end getMovieDetails function
+
+  getQueryResults(query: string): Observable<ApiResult> {
+    console.log("getQueryResults function called");
+    return this.http.get<ApiResult>(
+      `${environment.baseUrl}/search/movie?query=${query}&api_key=${environment.apiKey}`
+    );
+  }//end getSearchQuery function
 
 }//end class
