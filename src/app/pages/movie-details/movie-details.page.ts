@@ -13,7 +13,7 @@ export class MovieDetailsPage implements OnInit {
   movie:any = null;
   page: number = 1;
   similarMovies:any[] = [];
-  simMoviesTmp:any[] = [];
+  //simMoviesTmp:any[] = [];
   imageBaseUrl = environment.images;
   showSimilarMovies = false;
 
@@ -35,7 +35,7 @@ export class MovieDetailsPage implements OnInit {
     this.movieService.getSimilarMovies(id, this.page).subscribe(res => {
       console.log(res);
       console.log("similar movies^^");
-      this.similarMovies = res.results;
+      this.similarMovies = res.results.splice(0, 5);
       // this.similarMovies = this.similarMovies.slice(0, 5);
       // console.log(this.similarMovies);
       // console.log("shortened similar movies^^");
@@ -51,36 +51,36 @@ export class MovieDetailsPage implements OnInit {
 
   toggleSimilarMovies(){
     this.showSimilarMovies = !this.showSimilarMovies;
-    this.getTmp();
+    //this.getTmp();
   }//end toggleSimilarMovies function
 
   getRoute(id: string){
     return `../${id} `;
   }//end getRoute function
 
-  getNextFive(){
-    if(this.similarMovies.length == 0){
-      this.page ++;
-      this.movieService.getSimilarMovies(this.movie.id, this.page).subscribe(res => {
-        console.log(res);
-        console.log("page " + this.page + " of similar movies^^");
-        this.similarMovies = res.results;
-        console.log("getnextfive called with new page");
-        console.table(this.similarMovies);
+  // getNextFive(){
+  //   if(this.similarMovies.length == 0){
+  //     this.page ++;
+  //     this.movieService.getSimilarMovies(this.movie.id, this.page).subscribe(res => {
+  //       console.log(res);
+  //       console.log("page " + this.page + " of similar movies^^");
+  //       this.similarMovies = res.results;
+  //       console.log("getnextfive called with new page");
+  //       console.table(this.similarMovies);
       
-        return this.similarMovies.splice(0, 5);
-      });//end subscribe to getSimilarMovies
-    }//end if
+  //       return this.similarMovies.splice(0, 5);
+  //     });//end subscribe to getSimilarMovies
+  //   }//end if
 
-      console.log("getnextfive called");
-      console.table(this.similarMovies);
-      return this.similarMovies.splice(0, 5);
+  //     console.log("getnextfive called");
+  //     console.table(this.similarMovies);
+  //     return this.similarMovies.splice(0, 5);
 
-  }//end getNextFive function
+  // }//end getNextFive function
   
-  getTmp(){
-    this.simMoviesTmp = this.getNextFive();
-    return this.simMoviesTmp;
-  }
+  // getTmp(){
+  //   this.simMoviesTmp = this.getNextFive();
+  //   return this.simMoviesTmp;
+  // }//end getTmp function
 
 }//end class
