@@ -20,21 +20,21 @@ export class PeopleService {
   getCurrentPopularPeople(page = 1): Observable<ApiResult> {
     console.log("getCurrentPopularPeople function called");
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}/people/popular?api_key=${environment.apiKey}&page=${page}`
+      `${environment.baseUrl}/person/popular?api_key=${environment.apiKey}&page=${page}`
     );
   }//end getCurrentPopularPeople function
 
   getSimilarPeople(id: string, page: number): Observable<ApiResult> {
     console.log("getPeopleSimilar function called");
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}/people/${id}/similar?api_key=${environment.apiKey}&page=${page}`
+      `${environment.baseUrl}/person/${id}/similar?api_key=${environment.apiKey}&page=${page}`
     );
   }//end getSimilarPeople function
 
   getPeopleDetails(id: string) {
     console.log("getPeopleDetails function called");
     return this.http.get(
-      `${environment.baseUrl}/people/${id}?api_key=${environment.apiKey}`
+      `${environment.baseUrl}/person/${id}?api_key=${environment.apiKey}`
     );
   }//end getDetailsPeople function
 }

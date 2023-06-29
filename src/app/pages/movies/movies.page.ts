@@ -61,4 +61,4 @@ export class MoviesPage implements OnInit {
       this.queryResults = res.results;
     }); //end subscribe
   } //end loadSearches function
-} //end class
+} //end class MoviesPage
