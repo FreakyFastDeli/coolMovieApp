@@ -37,7 +37,7 @@ export class MoviesPage implements OnInit {
     .subscribe(res => {
       loading.dismiss();
       this.movies = [...this.movies, ...res.results];
-      console.log(res);
+      console.log(res.results);
       console.log("current popular movies^^");
       event?.target.complete();
     })//end subscribe
@@ -56,7 +56,7 @@ export class MoviesPage implements OnInit {
   loadSearches(event?: any | undefined) {
     const query = event.target.value;
     this.movieService.getQueryResults(query).subscribe((res) => {
-      console.log(res);
+      console.log(res.results);
       console.log('searched movie details^^');
       this.queryResults = res.results;
     }); //end subscribe
