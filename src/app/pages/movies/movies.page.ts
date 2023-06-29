@@ -17,11 +17,12 @@ export class MoviesPage implements OnInit {
   showSearch:boolean = false;
   imageBaseUrl:string = environment.images;
 
-  constructor(private movieService: MovieService, private loadingCtrl: LoadingController) {}
+  constructor(private movieService: MovieService, 
+    private loadingCtrl: LoadingController
+    ) {}
 
   ngOnInit() {
     this.loadMovies();
-
   }//end ngOnInit function
 
   async loadMovies(event?: any | undefined){
@@ -31,7 +32,9 @@ export class MoviesPage implements OnInit {
     });
     await loading.present();
 
-    this.movieService.getCurrentPopularMovies(this.currentPopularPage).subscribe(res => {
+    this.movieService
+    .getCurrentPopularMovies(this.currentPopularPage)
+    .subscribe(res => {
       loading.dismiss();
       this.movies = [...this.movies, ...res.results];
       console.log(res);
