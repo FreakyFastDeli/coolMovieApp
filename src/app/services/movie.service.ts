@@ -20,28 +20,28 @@ export class MovieService {
   getCurrentPopularMovies(page = 1): Observable<ApiResult> {
     console.log("getCurrentPopularMovies function called");
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}/movie/popular?api_key=${environment.apiKey}&page=${page}`
+      `${environment.baseUrl}/movie/popular?api_key=${environment.apiKey}&with_original_language=en&page=${page}`
     );
   }//end getCurrentPopularMovies function
 
   getSimilarMovies(id: string, page: number): Observable<ApiResult> {
     console.log("getSimilarMovies function called");
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}/movie/${id}/similar?api_key=${environment.apiKey}&page=${page}`
+      `${environment.baseUrl}/movie/${id}/similar?api_key=${environment.apiKey}&with_original_language=en&page=${page}`
     );
   }//end getSimilarMovies function
 
   getMovieDetails(id: string) {
     console.log("getMovieDetails function called");
     return this.http.get(
-      `${environment.baseUrl}/movie/${id}?api_key=${environment.apiKey}`
+      `${environment.baseUrl}/movie/${id}?api_key=${environment.apiKey}&with_original_language=en`
     );
   }//end getMovieDetails function
 
   getQueryResults(query: string): Observable<ApiResult> {
     console.log("getQueryResults function called");
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}/search/multi?query=${query}&api_key=${environment.apiKey}`
+      `${environment.baseUrl}/search/multi?query=${query}&api_key=${environment.apiKey}&with_original_language=en`
     );
   }//end getSearchQuery function
 

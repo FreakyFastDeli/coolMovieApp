@@ -20,21 +20,21 @@ export class TvService {
   getCurrentPopularTV(page = 1): Observable<ApiResult> {
     console.log("getCurrentPopularTV function called");
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}/tv/popular?api_key=${environment.apiKey}&page=${page}`
+      `${environment.baseUrl}/tv/popular?api_key=${environment.apiKey}&with_original_language=en&page=${page}`
     );
   }//end getCurrentPopularTV function
 
   getSimilarTV(id: string, page: number): Observable<ApiResult> {
     console.log("getTVSimilar function called");
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}/tv/${id}/similar?api_key=${environment.apiKey}&page=${page}`
+      `${environment.baseUrl}/tv/${id}/similar?api_key=${environment.apiKey}&with_original_language=en&page=${page}`
     );
   }//end getSimilarTV function
 
   getTVDetails(id: string) {
     console.log("getTVDetails function called");
     return this.http.get(
-      `${environment.baseUrl}/tv/${id}?api_key=${environment.apiKey}`
+      `${environment.baseUrl}/tv/${id}?api_key=${environment.apiKey}&with_original_language=en`
     );
   }//end getDetailsTV function
 
