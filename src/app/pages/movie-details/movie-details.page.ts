@@ -13,19 +13,21 @@ export class MovieDetailsPage implements OnInit {
   protected movie: any = null;
   protected page: number = 1;
   protected similarMovies: any[] = [];
-  protected nextFiveSimilarMovies: any[] = [];
+  protected nextFiveSimilarMovies: any[] = []; //NEW THING
   protected imageBaseUrl = environment.images;
   protected showSimilarMovies = false;
 
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController//NEW THING
   ) {}
 
   ngOnInit() {
     const id: any = this.route.snapshot.paramMap.get('id');
     this.movieService.getMovieDetails(id).subscribe((res) => {
+      console.log(res);
+      console.log("current selected movie details^^");
       this.movie = res;
     });
   }
@@ -36,14 +38,14 @@ export class MovieDetailsPage implements OnInit {
 
   toggleSimilarMovies() {
     this.showSimilarMovies = !this.showSimilarMovies;
-    this.getNextFiveSimilarMovies();
+    this.getSimilarMovies();//NEW THING
   }
 
   getRoute(id: string) {
     return `../${id} `;
   }
 
-  async getNextFiveSimilarMovies() {
+  async getSimilarMovies() {//NEW THING HERE TO END
     console.warn('getNextFiveSimilarMovies()');
     if (this.similarMovies.length == 0) {
       const loading = await this.loadingCtrl.create({
@@ -71,7 +73,7 @@ export class MovieDetailsPage implements OnInit {
   getFiveSimilarMovies() {
     console.warn('getFiveSimilarMovies()');
 
-    this.getNextFiveSimilarMovies();
+    this.getSimilarMovies();
     this.nextFiveSimilarMovies = this.similarMovies.splice(0, 5);
     console.table(this.nextFiveSimilarMovies);
   }

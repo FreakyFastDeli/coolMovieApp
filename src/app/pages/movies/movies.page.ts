@@ -8,9 +8,10 @@ import { environment } from 'src/environments/environment';
   templateUrl: './movies.page.html',
   styleUrls: ['./movies.page.scss'],
 }) //end component decorator
+
 export class MoviesPage implements OnInit {
   movies: any[] = [];
-  queryMovies: any[] = [];
+  queryResults: any[] = []; //Changed Variable Name from "queryMovies" to "queryResults"
   currentPopularPage: number = 1;
   showSearch: boolean = false;
   imageBaseUrl: string = environment.images;
@@ -26,7 +27,7 @@ export class MoviesPage implements OnInit {
 
   async loadMovies(event?: any | undefined) {
     const loading = await this.loadingCtrl.create({
-      message: 'Caters Faves!...',
+      message: 'Loading...',
       spinner: 'circular',
     });
     await loading.present();
@@ -35,9 +36,11 @@ export class MoviesPage implements OnInit {
       .getCurrentPopularMovies(this.currentPopularPage)
       .subscribe((res) => {
         loading.dismiss();
-        this.movies.push(...res.results); //[...this.movies, ...res.results];
+        this.movies.push(...res.results); //[...this.movies, ...res.results]; //is currently on Carter's fork: this.movies = [...this.movies, ...res.results]
+        // console.log(res);
+        // console.log("current popular movies^^");
         event?.target.complete();
-      });
+    });
   }
 
   loadMore(event: any | InfiniteScrollCustomEvent) {
@@ -53,9 +56,9 @@ export class MoviesPage implements OnInit {
   loadSearches(event?: any | undefined) {
     const query = event.target.value;
     this.movieService.getQueryResults(query).subscribe((res) => {
-      console.log(res);
-      console.log('searched movie details^^');
-      this.queryMovies = res.results;
+      // console.log(res);
+      // console.log('searched movie details^^');
+      this.queryResults = res.results;
     }); //end subscribe
   } //end loadSearches function
 } //end class
