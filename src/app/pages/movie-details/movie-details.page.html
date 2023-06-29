@@ -15,11 +15,11 @@
       <ion-card-title> {{ movie.title }} </ion-card-title>
       <ion-card-subtitle> {{ movie.tagline }} </ion-card-subtitle>
       <ion-text color="tertiary">
-        <span *ngFor="let g of movie.genres; let isLast = last"> 
+        <span *ngFor="let g of movie.genres; let isLast = last">
           {{ g.name }} {{!isLast ? '-' : '' }}</span>
       </ion-text>
     </ion-card-header>
-  
+
     <ion-label color="medium">{{ movie.overview }}</ion-label>
 
     <ion-item lines="none">
@@ -37,15 +37,19 @@
     </ion-button>
 
 
-      <ion-list *ngIf="showSimilarMovies" >
-        <ion-item button *ngFor="let item of similarMovies" [routerLink]="getRoute(item.id)">
-          <ion-avatar slot="start">
-            <img [src]="imageBaseUrl + '/w92' + item.poster_path" />
-          </ion-avatar>
-          <ion-label>{{ item.title }}</ion-label>
-        </ion-item>
-      </ion-list>
-    
+    <ion-list *ngIf="showSimilarMovies">
+      <ion-item button *ngFor="let item of nextFiveSimilarMovies" [routerLink]="getRoute(item.id)">
+        <ion-avatar slot="start">
+          <img [src]="imageBaseUrl + '/w92' + item.poster_path" />
+        </ion-avatar>
+        <ion-label>{{ item.title }}</ion-label>
+      </ion-item>
+      <ion-button (click)="getFiveSimilarMovies()"> 
+        <!-- NEW PART JUST THE BUTTON------------------------------------------------ -->
+        Next 5 movies
+      </ion-button>
+    </ion-list>
+
 
     <ion-footer>
       <ion-button expand="full" (click)="openHomepage()">
