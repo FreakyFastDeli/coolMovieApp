@@ -13,14 +13,14 @@ export class MovieDetailsPage implements OnInit {
   protected movie: any = null;
   protected page: number = 1;
   protected similarMovies: any[] = [];
-  protected nextFiveSimilarMovies: any[] = []; //NEW THING
+  protected nextFiveSimilarMovies: any[] = []; 
   protected imageBaseUrl = environment.images;
   protected showSimilarMovies = false;
 
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private loadingCtrl: LoadingController//NEW THING
+    private loadingCtrl: LoadingController
   ) {}
 
   ngOnInit() {
@@ -38,19 +38,19 @@ export class MovieDetailsPage implements OnInit {
 
   toggleSimilarMovies() {
     this.showSimilarMovies = !this.showSimilarMovies;
-    this.getSimilarMovies();//NEW THING
+    this.getSimilarMovies();
   }
 
   getRoute(id: string) {
     return `../${id} `;
   }
 
-  async getSimilarMovies() {//NEW THING HERE TO END
+  async getSimilarMovies() {
     console.warn('getNextFiveSimilarMovies()');
     if (this.similarMovies.length == 0) {
       const loading = await this.loadingCtrl.create({
-        message: 'Caters Fast Five!...',
-        spinner: 'lines',
+        message: 'Loading More...',
+        spinner: 'circular',
       });
       await loading.present();
 
@@ -65,7 +65,6 @@ export class MovieDetailsPage implements OnInit {
 
           this.nextFiveSimilarMovies = this.similarMovies.splice(0, 5);
 
-          console.table(this.nextFiveSimilarMovies);
         });
     }
   }
@@ -75,6 +74,5 @@ export class MovieDetailsPage implements OnInit {
 
     this.getSimilarMovies();
     this.nextFiveSimilarMovies = this.similarMovies.splice(0, 5);
-    console.table(this.nextFiveSimilarMovies);
   }
 }

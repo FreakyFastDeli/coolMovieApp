@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 
 export class MoviesPage implements OnInit {
   movies: any[] = [];
-  queryResults: any[] = []; //Changed Variable Name from "queryMovies" to "queryResults"
+  queryResults: any[] = [];
   currentPopularPage: number = 1;
   showSearch: boolean = false;
   imageBaseUrl: string = environment.images;
@@ -56,8 +56,8 @@ export class MoviesPage implements OnInit {
   loadSearches(event?: any | undefined) {
     const query = event.target.value;
     this.movieService.getQueryResults(query).subscribe((res) => {
-      // console.log(res);
-      // console.log('searched movie details^^');
+      console.log(res);
+      console.log('searched movie details^^');
       this.queryResults = res.results;
     }); //end subscribe
   } //end loadSearches function
