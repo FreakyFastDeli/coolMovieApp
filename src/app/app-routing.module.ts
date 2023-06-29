@@ -22,11 +22,27 @@ const routes: Routes = [
   },
   {
     path: 'people',
-    loadChildren: () => import('./pages/people/people.module').then( m => m.PeoplePageModule)
+    loadChildren: () => 
+    import('./pages/people/people.module').then(
+      (m) => m.PeoplePageModule)
+  },
+  {
+    path: 'people/:id',
+    loadChildren: () => 
+    import('./pages/people-details/people-details.module').then(
+      (m) => m.PeopleDetailsPageModule)
   },
   {
     path: 'tv',
-    loadChildren: () => import('./pages/tv/tv.module').then( m => m.TvPageModule)
+    loadChildren: () => 
+    import('./pages/tv/tv.module').then(
+      (m) => m.TvPageModule)
+  },
+  {
+    path: 'tv/:id',
+    loadChildren: () => 
+    import('./pages/tv-details/tv-details.module').then(
+      (m) => m.TvDetailsPageModule)
   },
 ];
 

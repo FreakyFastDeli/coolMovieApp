@@ -14,7 +14,6 @@ export interface ApiResult {
   providedIn: 'root'
 })
 export class MovieService {
-  
 
   constructor(private http: HttpClient) { }
 
