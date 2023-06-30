@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title slot="start" *ngIf="!showSearch">Trending Movies</ion-title>
+    <ion-title slot="end" *ngIf="!showSearch">Trending Movies</ion-title>
+    <ion-searchbar class="searchbar" slot="end" [debounce]="750"(ionInput)="loadSearches($event)" *ngIf="showSearch"></ion-searchbar>
     <ion-button class="searchbutton" slot="end" (click)="toggleShowSearch()">
       <ion-icon name="search-outline"></ion-icon>
     </ion-button>
-    <ion-searchbar class="searchbar" slot="start" [debounce]="750"(ionInput)="loadSearches($event)" *ngIf="showSearch"></ion-searchbar>
+    
   </ion-toolbar>
 </ion-header>
-
 <!-- When !ShowSearch -->
 <ion-content [fullscreen]="true" *ngIf="!showSearch">
   <ion-list>

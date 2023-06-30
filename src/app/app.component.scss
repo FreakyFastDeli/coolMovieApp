@@ -1,4 +1,12 @@
-// Force align searchbar text left 
 .searchbar-input-container {
     align-content: flex-start;
 }
+
+.transparent-component {
+    pointer-events: none;
+}
+
+.nontransparent-component {
+    pointer-events: auto;
+}
+

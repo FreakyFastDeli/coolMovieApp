@@ -27,7 +27,7 @@ export class PeopleService {
   getSimilarPeople(id: string, page: number): Observable<ApiResult> {
     console.log("getPeopleSimilar function called");
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}/person/${id}/similar?api_key=${environment.apiKey}&page=${page}`
+      `${environment.baseUrl}/person/${id}/movie_credits?api_key=${environment.apiKey}&page=${page}`
     );
   }//end getSimilarPeople function
 
@@ -37,4 +37,4 @@ export class PeopleService {
       `${environment.baseUrl}/person/${id}?api_key=${environment.apiKey}`
     );
   }//end getDetailsPeople function
-}
+}//end class

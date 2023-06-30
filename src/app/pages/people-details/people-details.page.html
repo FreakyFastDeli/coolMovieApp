@@ -1,13 +1,56 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>people-details</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title slot="end">{{people?.name}}</ion-title>
+    <ion-buttons class="backbutton" slot="end" color="primary">
+      <ion-back-button  defaultHref="/movies"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">people-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<ion-content>
+  <ion-card *ngIf="people">
+    <img [src]="imageBaseUrl + '/w400' + people?.profile_path" />
+
+    <ion-card-header>
+      <ion-card-title> {{ people.name }} </ion-card-title>
+      <!-- <ion-card-subtitle> {{ people.tagline }} </ion-card-subtitle> -->
+      <ion-text color="tertiary">
+        <span>{{ people.known_for_department }}</span>
+      </ion-text>
+    </ion-card-header>
+
+    <ion-label class="walltext" color="medium">{{ people.biography }}</ion-label>
+
+    <ion-item lines="none">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-label>{{ people.birthday }}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-icon name="map" slot="start"></ion-icon>
+      <ion-label>{{ people.place_of_birth }}</ion-label>
+    </ion-item>
+
+    <ion-button (click)="toggleSimilarPeople()">
+      {{ showSimilarPeople ? 'Hide' : 'Show' }} Similar Movies
+    </ion-button>
+
+
+    <ion-list *ngIf="showSimilarPeople">
+      <ion-item button *ngFor="let item of nextFiveSimilarPeople" [routerLink]="getRoute(item.cast.id)">
+        <ion-avatar slot="start">
+          <img [src]="imageBaseUrl + '/w92' + item.cast.poster_path" />
+        </ion-avatar>
+        <ion-label>{{ item.cast.title }}</ion-label>
+      </ion-item>
+      <ion-button (click)="getFiveSimilarPeople()"> 
+        Load more
+      </ion-button>
+    </ion-list>
+
+
+    <ion-footer *ngIf="people.homepage">
+      <ion-button expand="full" (click)="openHomepage()">
+        Open Person Homepage
+      </ion-button>
+    </ion-footer>

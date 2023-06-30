@@ -30,20 +30,20 @@ export class MovieDetailsPage implements OnInit {
       console.log("current selected movie details^^");
       this.movie = res;
     });
-  }
+  }//end ngOnInit function
 
   openHomepage() {
     window.open(this.movie.homepage);
-  }
+  }//end openHomepage function
 
   toggleSimilarMovies() {
     this.showSimilarMovies = !this.showSimilarMovies;
     this.getSimilarMovies();
-  }
+  }//end toggleSimilarMovies function
 
   getRoute(id: string) {
     return `../${id} `;
-  }
+  }//end getRoute function
 
   async getSimilarMovies() {
     console.warn('getNextFiveSimilarMovies()');
@@ -66,13 +66,13 @@ export class MovieDetailsPage implements OnInit {
           this.nextFiveSimilarMovies = this.similarMovies.splice(0, 5);
 
         });
-    }
-  }
+    }//end if
+  }//end getSimilarMovies function
 
   getFiveSimilarMovies() {
     console.warn('getFiveSimilarMovies()');
 
     this.getSimilarMovies();
     this.nextFiveSimilarMovies = this.similarMovies.splice(0, 5);
-  }
-}
+  }//end getFiveSimilarMovies function
+}//end class
