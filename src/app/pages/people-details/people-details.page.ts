@@ -12,10 +12,9 @@ import { LoadingController } from '@ionic/angular';
 export class PeopleDetailsPage implements OnInit {
   protected people: any = null;
   protected page: number = 1;
-  protected similarPeople: any[] = [];
-  protected nextFiveSimilarPeople: any[] = [];
+  protected peopleCredits: any[] = [];
   protected imageBaseUrl = environment.images;
-  protected showSimilarPeople = false;
+  protected showPeopleCredits = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,44 +35,28 @@ export class PeopleDetailsPage implements OnInit {
     window.open(this.people.homepage);
   }//end openHomepage function
 
-  toggleSimilarPeople() {
-    this.showSimilarPeople = !this.showSimilarPeople;
-    this.getSimilarPeople();
+  togglePeopleCredits() {
+    this.showPeopleCredits = !this.showPeopleCredits;
+    this.getPeopleCredits();
   }//end toggleSimilarPeople function
 
-  getRoute(id: string) {
-    return `../${id} `;
+  getRoute(id: any) {
+    return `../movies/${id.id} `;
   }//end getRoute function
 
-  async getSimilarPeople() {
-    console.warn('getNextFiveSimilarPeople()');
-    if (this.similarPeople.length == 0) {
-      const loading = await this.loadingCtrl.create({
-        message: 'Loading More...',
-        spinner: 'circular',
-      });
-      await loading.present();
+  async getPeopleCredits() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading More...',
+      spinner: 'circular',
+    });
+    await loading.present();
 
-      this.page++;
-      this.peopleService
-        .getSimilarPeople(this.people.id, this.page)
-        .subscribe((res) => {
-          loading.dismiss();
-          this.similarPeople = res.results;
-
-          console.table(this.similarPeople);
-
-          this.nextFiveSimilarPeople = this.similarPeople.splice(0, 5);
-
-        });
-    }
-  }//end getSimilarPeople function
-
-  getFiveSimilarPeople() {
-    console.warn('getFiveSimilarPeople()');
-
-    this.getSimilarPeople();
-    this.nextFiveSimilarPeople = this.similarPeople.splice(0, 5);
-  }//end getNextFiveSimilarPeople function
+    this.page++;
+    this.peopleService.getPeopleCredits(this.people.id).subscribe((res) => {
+      loading.dismiss();
+      this.peopleCredits = res.cast;
+      console.table(this.peopleCredits);
+    });
+  }//end getPeopleCredits function
 
 }

@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 
 export interface ApiResult {
   page: number;
-  results: [];
+  cast: [];
   total_pages: number;
   total_results: number;
 }
@@ -24,12 +24,13 @@ export class PeopleService {
     );
   }//end getCurrentPopularPeople function
 
-  getSimilarPeople(id: string, page: number): Observable<ApiResult> {
-    console.log("getPeopleSimilar function called");
+  getPeopleCredits(id: string): Observable<ApiResult> {
+    console.log("getPeopleCredits function called");
+    console.log(`${environment.baseUrl}/person/${id}/movie_credits?api_key=${environment.apiKey}`);
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}/person/${id}/movie_credits?api_key=${environment.apiKey}&page=${page}`
+      `${environment.baseUrl}/person/${id}/movie_credits?api_key=${environment.apiKey}`
     );
-  }//end getSimilarPeople function
+  }
 
   getPeopleDetails(id: string) {
     console.log("getPeopleDetails function called");

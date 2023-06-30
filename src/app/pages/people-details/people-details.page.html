@@ -31,21 +31,18 @@
       <ion-label>{{ people.place_of_birth }}</ion-label>
     </ion-item>
 
-    <ion-button (click)="toggleSimilarPeople()">
-      {{ showSimilarPeople ? 'Hide' : 'Show' }} Similar Movies
+    <ion-button (click)="togglePeopleCredits()">
+      {{ showPeopleCredits ? 'Hide' : 'Show' }} Similar Movies
     </ion-button>
 
 
-    <ion-list *ngIf="showSimilarPeople">
-      <ion-item button *ngFor="let item of nextFiveSimilarPeople" [routerLink]="getRoute(item.cast.id)">
+    <ion-list *ngIf="showPeopleCredits">
+      <ion-item button *ngFor="let item of peopleCredits" [routerLink]="getRoute(item)">
         <ion-avatar slot="start">
           <img [src]="imageBaseUrl + '/w92' + item.cast.poster_path" />
         </ion-avatar>
         <ion-label>{{ item.cast.title }}</ion-label>
       </ion-item>
-      <ion-button (click)="getFiveSimilarPeople()"> 
-        Load more
-      </ion-button>
     </ion-list>
 
 
