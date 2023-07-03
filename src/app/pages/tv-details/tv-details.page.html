@@ -50,7 +50,7 @@
     </ion-list>
 
 
-    <ion-footer>
+    <ion-footer *ngIf="tv.homepage">
       <ion-button expand="full" (click)="openHomepage()">
         Open TV Homepage
       </ion-button>
