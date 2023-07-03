@@ -8,18 +8,18 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="people">
-    <img [src]="imageBaseUrl + '/w400' + people?.profile_path" />
+  <ion-card class="card1" *ngIf="people">
+    <img class="resize" [src]="imageBaseUrl + '/w400' + people?.profile_path" />
 
     <ion-card-header>
       <ion-card-title> {{ people.name }} </ion-card-title>
-      <!-- <ion-card-subtitle> {{ people.tagline }} </ion-card-subtitle> -->
+      
       <ion-text color="tertiary">
         <span>{{ people.known_for_department }}</span>
       </ion-text>
     </ion-card-header>
 
-    <ion-label class="walltext" color="medium">{{ people.biography }}</ion-label>
+    <ion-card-content class="walltext" color="medium">{{ people.biography }}</ion-card-content>
 
     <ion-item lines="none">
       <ion-icon name="calendar-outline" slot="start"></ion-icon>
@@ -32,22 +32,25 @@
     </ion-item>
 
     <ion-button (click)="togglePeopleCredits()">
-      {{ showPeopleCredits ? 'Hide' : 'Show' }} Similar Movies
+      {{ showPeopleCredits ? 'Hide' : 'Show' }} Credited Movies
     </ion-button>
 
 
     <ion-list *ngIf="showPeopleCredits">
       <ion-item button *ngFor="let item of peopleCredits" [routerLink]="getRoute(item)">
         <ion-avatar slot="start">
-          <img [src]="imageBaseUrl + '/w92' + item.cast.poster_path" />
+          <img [src]="imageBaseUrl + '/w92' + item.poster_path" />
         </ion-avatar>
-        <ion-label>{{ item.cast.title }}</ion-label>
+        <ion-label>{{ item.title }}</ion-label>
       </ion-item>
     </ion-list>
 
-
+    
     <ion-footer *ngIf="people.homepage">
       <ion-button expand="full" (click)="openHomepage()">
         Open Person Homepage
       </ion-button>
     </ion-footer>
+  </ion-card>
+  
+</ion-content>

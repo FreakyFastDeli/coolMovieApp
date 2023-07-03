@@ -40,8 +40,12 @@ export class PeopleDetailsPage implements OnInit {
     this.getPeopleCredits();
   }//end toggleSimilarPeople function
 
-  getRoute(id: any) {
-    return `../movies/${id.id} `;
+  getRoute(creditedMovie: any) {
+    console.log(creditedMovie.id);
+    // creditedMovie.id = creditedMovie.id.toString();
+    // creditedMovie.id = creditedMovie.id.slice(0, -3);
+    // console.log(creditedMovie.id);
+    return `../../movies/${creditedMovie.id}`;
   }//end getRoute function
 
   async getPeopleCredits() {
@@ -54,6 +58,7 @@ export class PeopleDetailsPage implements OnInit {
     this.page++;
     this.peopleService.getPeopleCredits(this.people.id).subscribe((res) => {
       loading.dismiss();
+      console.log(res.cast);
       this.peopleCredits = res.cast;
       console.table(this.peopleCredits);
     });

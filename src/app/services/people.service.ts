@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 
 export interface ApiResult {
   page: number;
+  results: [];
   cast: [];
   total_pages: number;
   total_results: number;
