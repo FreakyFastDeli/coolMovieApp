@@ -34,7 +34,8 @@ export class PeoplePage implements OnInit {
     .getCurrentPopularPeople(this.currentPopularPage)
     .subscribe(res => {
       loading.dismiss();
-      this.people = [...this.people, ...res.cast];
+      console.log(res);
+      this.people.push(...res.cast); //this.people = [...this.people, ...res.cast];
       console.log(res.cast);
       console.log("current popular people^^");
       event?.target.complete();
