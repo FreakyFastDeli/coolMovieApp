@@ -44,7 +44,6 @@ export class MoviesPage implements OnInit {
   }//end loadMovies function
 
   loadMore(event: any | InfiniteScrollCustomEvent) {
-    //console.warn(event);
     this.currentPopularPage++;
     this.loadMovies(event);
   } //end loadMore function

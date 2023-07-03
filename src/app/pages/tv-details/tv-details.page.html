@@ -1,13 +1,57 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>tv-details</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title slot="end">{{tv?.name}}</ion-title>
+    <ion-buttons class="backbutton" slot="end" color="primary">
+      <ion-back-button  defaultHref="/tv"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">tv-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<ion-content>
+  <ion-card *ngIf="tv">
+    <img [src]="imageBaseUrl + '/w400' + tv?.poster_path" />
+
+    <ion-card-header>
+      <ion-card-title> {{ tv.name }} </ion-card-title>
+      <ion-card-subtitle> {{ tv.tagline }} </ion-card-subtitle>
+      <ion-text color="tertiary">
+        <span *ngFor="let g of tv.genres; let isLast = last">
+          {{ g.name }} {{!isLast ? '-' : '' }}</span>
+      </ion-text>
+    </ion-card-header>
+
+    <ion-label color="medium">{{ tv.overview }}</ion-label>
+
+    <ion-item lines="none">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-label>First Air Date: {{ tv.first_air_date }}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-icon name="alarm" slot="start"></ion-icon>
+      <ion-label>Next Air Date: {{ tv.next_episode_to_air ? tv.next_episode_to_air.air_date : 'Ended' }}</ion-label>
+    </ion-item>
+
+    <ion-button (click)="toggleSimilarTV()">
+      {{ showSimilarTV ? 'Hide' : 'Show' }} Similar TV
+    </ion-button>
+
+
+    <ion-list *ngIf="showSimilarTV">
+      <ion-item button *ngFor="let item of nextFiveSimilarTV" [routerLink]="getRoute(item.id)">
+        <ion-avatar slot="start">
+          <img [src]="imageBaseUrl + '/w92' + item.poster_path" />
+        </ion-avatar>
+        <ion-label>{{ item.name }}</ion-label>
+      </ion-item>
+      <ion-button (click)="getFiveSimilarTV()"> 
+        Load more
+      </ion-button>
+    </ion-list>
+
+
+    <ion-footer>
+      <ion-button expand="full" (click)="openHomepage()">
+        Open TV Homepage
+      </ion-button>
+    </ion-footer>

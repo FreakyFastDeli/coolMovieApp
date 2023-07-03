@@ -42,7 +42,6 @@ export class TvPage implements OnInit {
   }//end loadTV function
 
   loadMore(event: any | InfiniteScrollCustomEvent) {
-    //console.warn(event);
     this.currentPopularPage++;
     this.loadTV(event);
   }//end loadMore function

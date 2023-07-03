@@ -43,7 +43,7 @@ export class PeoplePage implements OnInit {
   }//end loadPeople function
 
   loadMore(event: any | InfiniteScrollCustomEvent) {
-    //console.warn(event);
+
     this.currentPopularPage++;
     this.loadPeople(event);
   }//end loadMore function

@@ -46,7 +46,6 @@ export class MovieDetailsPage implements OnInit {
   }//end getRoute function
 
   async getSimilarMovies() {
-    console.warn('getNextFiveSimilarMovies()');
     if (this.similarMovies.length == 0) {
       const loading = await this.loadingCtrl.create({
         message: 'Loading More...',
@@ -70,7 +69,6 @@ export class MovieDetailsPage implements OnInit {
   }//end getSimilarMovies function
 
   getFiveSimilarMovies() {
-    console.warn('getFiveSimilarMovies()');
 
     this.getSimilarMovies();
     this.nextFiveSimilarMovies = this.similarMovies.splice(0, 5);
