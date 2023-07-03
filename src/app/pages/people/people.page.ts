@@ -12,6 +12,7 @@ export class PeoplePage implements OnInit {
   people: any[] = [];
   queryResults: any[] = [];
   currentPopularPage: number = 1;
+  showSearch: boolean = false;
   imageBaseUrl: string = environment.images;
 
   constructor(
@@ -47,5 +48,18 @@ export class PeoplePage implements OnInit {
     this.currentPopularPage++;
     this.loadPeople(event);
   }//end loadMore function
+
+  toggleShowSearch() {
+    this.showSearch = !this.showSearch;
+  }//end toggleShowSearch function
+
+  loadSearches(event?: any | undefined) {
+    const query = event.target.value;
+    this.peopleService.getQueryResults(query).subscribe((res) => {
+      console.log(res.results);
+      console.log('searched people details^^');
+      this.queryResults = res.results;
+    });//end subscribe
+  }//end loadSearches function
 
 }//end class PeoplePage

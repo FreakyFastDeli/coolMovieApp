@@ -1,10 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title slot="end">Trending People</ion-title>
+    <ion-title slot="end" *ngIf="!showSearch">Trending People</ion-title>
+    <ion-searchbar class="searchbar" slot="end" [debounce]="750"(ionInput)="loadSearches($event)" *ngIf="showSearch"></ion-searchbar>
+    <ion-button class="searchbutton" slot="end" (click)="toggleShowSearch()">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button>
+
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
+<!-- When !ShowSearch -->
+<ion-content [fullscreen]="true" *ngIf="!showSearch">
   <ion-list>
     <ion-item button *ngFor="let item of people" [routerLink]="[item.id]">
       <ion-avatar slot="start">
@@ -21,4 +26,18 @@
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+</ion-content>
+
+<!-- When ShowSearch  -->
+<ion-content *ngIf="showSearch">
+  <ion-list>
+    <ion-item button *ngFor="let item of queryResults" [routerLink]="[item.id]">
+      <ion-avatar slot="start">
+        <img [src]="imageBaseUrl + '/w92' + item.profile_path" />
+      </ion-avatar>
+      <ion-label text-wrap>{{ item.name }}
+        <p>{{ item.known_for_department }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

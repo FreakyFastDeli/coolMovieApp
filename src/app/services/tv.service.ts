@@ -38,6 +38,11 @@ export class TvService {
     );
   }//end getDetailsTV function
 
+  getQueryResults(query: string): Observable<ApiResult> {
+    console.log("getQueryResults function called");
+    return this.http.get<ApiResult>(
+      `${environment.baseUrl}/search/tv?query=${query}&api_key=${environment.apiKey}&with_original_language=en`
+    );
+  }//end getSearchQuery function
   
-
-}
+}//end class

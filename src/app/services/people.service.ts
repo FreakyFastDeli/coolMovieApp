@@ -39,4 +39,11 @@ export class PeopleService {
       `${environment.baseUrl}/person/${id}?api_key=${environment.apiKey}`
     );
   }//end getDetailsPeople function
+
+  getQueryResults(query: string): Observable<ApiResult> {
+    console.log("getQueryResults function called");
+    return this.http.get<ApiResult>(
+      `${environment.baseUrl}/search/person?query=${query}&api_key=${environment.apiKey}`
+    );
+  }//end getSearchQuery function
 }//end class

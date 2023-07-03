@@ -12,7 +12,9 @@ export class TvPage implements OnInit {
   TV: any[] = [];
   queryResults: any[] = [];
   currentPopularPage: number = 1;
+  showSearch: boolean = false;
   imageBaseUrl: string = environment.images;
+
   constructor(
     private tvService: TvService,
     private loadingCtrl: LoadingController
@@ -45,4 +47,20 @@ export class TvPage implements OnInit {
     this.currentPopularPage++;
     this.loadTV(event);
   }//end loadMore function
+
+  toggleShowSearch() {
+    this.showSearch = !this.showSearch;
+  }//end toggleShowSearch function
+
+  loadSearches(event?: any | undefined) {
+    const query = event.target.value;
+    this.tvService.getQueryResults(query).subscribe((res) => {
+      console.log(res.results);
+      console.log('searched tv details^^');
+      this.queryResults = res.results;
+    }); //end subscribe
+  }//end loadSearches function
+
+
+
 }//end class TvPage
